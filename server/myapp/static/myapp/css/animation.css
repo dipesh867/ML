@@ -1,0 +1,227 @@
+/* Enhanced Animations - Works alongside existing code */
+
+/* Smooth transitions for all interactive elements */
+.btn,
+.nav-link,
+.card,
+.feature-card,
+.team-card,
+.social-links a,
+.program-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effects */
+.btn:hover,
+.nav-link:hover,
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.15);
+}
+
+/* Team card enhancements */
+.team-card {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card.active {
+  animation: cardActivate 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes cardActivate {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 
+      0 20px 40px -10px rgba(var(--primary-rgb), 0.2),
+      0 10px 20px -5px rgba(var(--primary-rgb), 0.1);
+  }
+}
+
+/* Image container animations */
+.team-image-container {
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card:hover .team-image-container {
+  transform: perspective(1000px) rotateY(-8deg) translateZ(20px);
+}
+
+.team-image-container img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card:hover .team-image-container img {
+  transform: scale(1.05);
+}
+
+/* Navigation button enhancements */
+.team-nav-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-nav-btn:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: scale(1.1) translateY(-50%);
+  box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+/* Dot indicator animations */
+.slide-dot {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-dot:hover {
+  transform: scale(1.3);
+  opacity: 0.8;
+}
+
+.slide-dot.active {
+  transform: scale(1.5);
+  animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0);
+  }
+}
+
+/* Section animations */
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  border-radius: 2px;
+  animation: lineExpand 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes lineExpand {
+  to {
+    width: 80px;
+  }
+}
+
+/* Achievement counter animations */
+.count-up {
+  animation: countUp 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  position: relative;
+}
+
+.count-up::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: var(--primary-light);
+  border-radius: 2px;
+  transform: scaleX(0);
+  animation: lineGrow 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.8s;
+}
+
+@keyframes lineGrow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Social links animations */
+.social-links a {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-links a:hover {
+  transform: translateY(-5px);
+}
+
+.social-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Feature card animations */
+.feature-card {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Program item animations */
+.program-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.1);
+}
+
+.program-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.program-item:hover .program-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .team-card:hover .team-image-container,
+  .team-card:hover .team-info {
+    transform: none;
+  }
+} 

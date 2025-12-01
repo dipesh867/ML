@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Motherland Academy - Admin Panel</title>
+    <style>
+        :root{
+            --primary:#ed1b29;
+            --secondary:#fef2f2;
+            --dark:#1a1a1a;
+            --light:#ffffff;
+        }
+
+        *{
+            margin:0; padding:0;
+            box-sizing:border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body{
+            display:flex;
+            background:#f5f5f5;
+            overflow:hidden;
+        }
+
+        /* ---------------- SIDEBAR ------------------ */
+        .sidebar{
+            width:260px;
+            background:var(--primary);
+            height:100vh;
+            padding:20px;
+            color:white;
+            display:flex;
+            flex-direction:column;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {transform:translateX(-120px); opacity:0;}
+            to {transform:translateX(0); opacity:1;}
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:30px;
+            text-align:center;
+            letter-spacing:1px;
+        }
+
+        .menu button{
+            width:100%;
+            padding:15px;
+            margin:6px 0;
+            border:none;
+            background:rgba(255,255,255,0.2);
+            color:white;
+            font-size:16px;
+            border-radius:6px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .menu button:hover{
+            background:white;
+            color:var(--primary);
+        }
+
+        /* ---------------- CONTENT AREA ------------------ */
+        .content{
+            flex:1;
+            overflow-y:auto;
+            padding:30px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity:0;}
+            to {opacity:1;}
+        }
+
+        h2{
+            margin-bottom:20px;
+            color:var(--primary);
+        }
+
+        .hidden{
+            display:none;
+        }
+
+        /* ---------------- TABLE DESIGN ------------------ */
+        table{
+            width:100%;
+            border-collapse: collapse;
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td{
+            padding:14px;
+            border-bottom:1px solid #eee;
+        }
+
+        th{
+            background:var(--secondary);
+            color:var(--primary);
+            font-weight:600;
+            text-align:left;
+        }
+
+        .actions button{
+            padding:6px 12px;
+            border:none;
+            border-radius:4px;
+            cursor:pointer;
+            margin-right:5px;
+            font-size:14px;
+        }
+
+        .verify-btn{
+            background:#999;
+            color:white;
+        }
+
+        .verified{
+            background:#28a745 !important;
+        }
+
+        .delete-btn{
+            background:#ed1b29;
+            color:white;
+        }
+
+        /* ---------------- GALLERY UPLOAD ------------------ */
+        .upload-box{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+            margin-bottom:20px;
+        }
+
+        .upload-box input{
+            margin-bottom:15px;
+        }
+
+        .gallery-preview{
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .photo-card{
+            background:var(--light);
+            width:180px;
+            padding:10px;
+            border-radius:8px;
+            box-shadow:0 0 8px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .photo-card img{
+            width:100%;
+            height:120px;
+            object-fit:cover;
+            border-radius:6px;
+        }
+
+        textarea{
+            width:100%;
+            padding:8px;
+            border-radius:6px;
+        }
+
+        .submit-btn{
+            background:var(--primary);
+            color:white;
+            padding:12px 20px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            margin-top:10px;
+            transition:0.3s;
+        }
+
+        .submit-btn:hover{
+            opacity:0.8;
+        }
+        .photo-card button{
+    width:100%;
+    border:none;
+    background:#ed1b29;
+    color:white;
+    padding:7px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.photo-card button:hover{
+    opacity:0.8;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">Motherland Academy<br>Admin Panel</div>
+
+        <div class="menu">
+            <button onclick="showSection('contacts')">📩 Contact Messages</button>
+            <button onclick="showSection('admissions')">🎓 Admissions</button>
+            <button onclick="showSection('gallery')">🖼️ Gallery</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+
+        <!-- CONTACTS -->
+        <div id="contacts">
+            <h2>Contact Messages</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Subject</th>
+
+                    <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Ram</td>
+                    <td>ram@mail.com</td>
+                    <td>919191911</td>
+                    <td>Enquiry</td>
+                    <td>Inquiry about school fees.</td>
+                    <td class="actions">
+                        <button class="verify-btn" onclick="markVerified(this)">Mark</button>
+                        <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ADMISSIONS -->
+        <div id="admissions" class="hidden">
+            <h2>Admissions</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Parent Name</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Sita</td>
+                    <td>Grade 4</td>
+                    <td>shyamkumari</td>
+                    <td>9812345678</td>
+                    <td class="actions">
+                        <button class="verify-btn" onclick="markVerified(this)">Mark</button>
+                        <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- GALLERY -->
+        <div id="gallery" class="hidden">
+            <h2>Gallery Upload</h2>
+
+            <div class="upload-box">
+                <label>Upload Photos (Multiple Allowed):</label><br>
+                <input type="file" id="galleryInput" multiple accept="image/*"><br>
+
+                <label>Description for Photos:</label>
+                <textarea rows="3" placeholder="Write description..."></textarea>
+
+                <button class="submit-btn">Upload to Gallery</button>
+            </div>
+
+            <h3>Preview</h3>
+            <div class="gallery-preview" id="galleryPreview"></div>
+        </div>
+
+    </div>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll('.content > div').forEach(div => div.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+// DELETE row
+function deleteRow(btn){
+    btn.parentElement.parentElement.remove();
+}
+
+// MARK verified
+function markVerified(btn){
+    btn.classList.toggle('verified');
+    btn.textContent = btn.classList.contains('verified') ? "Verified" : "Mark";
+}
+
+// GALLERY PREVIEW
+// GALLERY PREVIEW
+document.getElementById('galleryInput').addEventListener('change', function(){
+    let preview = document.getElementById('galleryPreview');
+    preview.innerHTML = "";
+    
+    Array.from(this.files).forEach((file, index)=>{
+        let reader = new FileReader();
+        reader.onload = function(e){
+            let card = document.createElement("div");
+            card.className = "photo-card";
+            card.innerHTML = `
+                <img src="${e.target.result}">
+                <p style="font-size:14px; margin-top:5px;">${file.name}</p>
+                <button class="delete-btn" style="margin-top:8px; padding:6px 12px;" onclick="deletePhoto(this)">Delete</button>
+            `;
+            preview.appendChild(card);
+        }
+        reader.readAsDataURL(file);
+    });
+});
+
+// DELETE PHOTO
+function deletePhoto(button){
+    button.parentElement.remove();
+}
+
+</script>
+
+</body>
+</html>

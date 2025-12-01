@@ -1,0 +1,933 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Motherland Academy School</title>
+<link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="{% static 'myapp/js/script.js' %}" defer></script>
+
+  <style>
+    /* Page-specific styles */
+    .page-header {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+      padding: 8rem 2rem 6rem;
+      margin-top: 10vh;
+      background-color: #f8fafc;
+      box-shadow: 
+        0 25px 30px -15px rgba(var(--primary-rgb), 0.15),
+        inset 0 -10px 20px -10px rgba(var(--primary-rgb), 0.1);
+    }
+    
+    .page-header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3);
+      animation: scaleIn 1.5s ease-out forwards;
+    }
+    
+    .page-header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.95), rgba(var(--primary-rgb), 0.8));
+      animation: fadeIn 1s ease-out forwards;
+    }
+    
+    .page-header-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 64rem;
+      padding: 0 1rem;
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .page-header-content h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      animation: slideInUp 0.8s ease-out forwards;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-header-content p {
+      font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-out 0.3s forwards;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .team-member-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 
+        0 20px 25px -5px rgba(var(--primary-rgb), 0.2),
+        0 10px 10px -5px rgba(var(--primary-rgb), 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-member-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 
+        0 30px 35px -10px rgba(var(--primary-rgb), 0.25),
+        0 20px 25px -15px rgba(var(--primary-rgb), 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+    
+    .team-member-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid var(--primary);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: scaleIn 0.8s ease-out forwards;
+    }
+    
+    .team-member-card:hover .team-member-img {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(var(--primary-rgb), 0.3);
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+      animation: heightGrow 1.5s ease-out forwards;
+    }
+    
+    .timeline-item {
+      padding: 1.5rem 2.5rem;
+      position: relative;
+      width: 50%;
+      margin-bottom: 2rem;
+      opacity: 0;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border: 4px solid var(--primary);
+      border-radius: 50%;
+      top: 1.5rem;
+      z-index: 1;
+      animation: scaleIn 0.5s ease-out forwards;
+    }
+    
+    .timeline-left {
+      left: 0;
+      animation: slideInLeft 0.8s ease-out forwards;
+    }
+    
+    .timeline-right {
+      left: 50%;
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+    
+    .timeline-left::after {
+      right: -10px;
+    }
+    
+    .timeline-right::after {
+      left: -10px;
+    }
+    
+    .timeline-content {
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 
+        0 20px 25px -5px rgba(var(--primary-rgb), 0.15),
+        0 10px 10px -5px rgba(var(--primary-rgb), 0.1),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 30px 35px -10px rgba(var(--primary-rgb), 0.25),
+        0 20px 25px -15px rgba(var(--primary-rgb), 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+    
+    .timeline-year {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    /* Enhanced Animations */
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes heightGrow {
+      from {
+        height: 0;
+      }
+      to {
+        height: 100%;
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Add bounce animation for the landing section arrow */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-20px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    /* Enhanced Responsive Styles */
+    @media screen and (max-width: 1200px) {
+      .container {
+        max-width: 960px;
+        padding: 0 2rem;
+      }
+
+      .page-header {
+        padding: 7rem 2rem 5rem;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      .container {
+        max-width: 720px;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-item::after {
+        left: 21px;
+      }
+      
+      .timeline-right {
+        left: 0%;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .page-header {
+        padding: 6rem 1.5rem 4rem;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        max-width: 540px;
+        padding: 0 1rem;
+      }
+
+      .page-header {
+        min-height: 60vh;
+        padding: 5rem 1rem 3rem;
+      }
+
+      .page-header-content h1 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+      }
+
+      .page-header-content p {
+        font-size: clamp(1rem, 1.2vw, 1.1rem);
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
+      .team-member-card {
+        padding: 1.5rem;
+      }
+
+      .team-member-img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .timeline-content {
+        padding: 1rem;
+      }
+
+      .page-header {
+        padding: 4.5rem 1rem 2.5rem;
+      }
+    }
+
+    /* Touch Device Optimizations */
+    @media (hover: none) {
+      .team-member-card:hover,
+      .timeline-content:hover {
+        transform: none;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      ::before,
+      ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* Navbar Spacing */
+    .navbar {
+      position: fixed;
+      width: 100vw;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px -1px rgba(var(--primary-rgb), 0.1), 
+                  0 2px 4px -1px rgba(var(--primary-rgb), 0.06);
+      transition: all 0.3s ease;
+    }
+
+   
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 15px -3px rgba(var(--primary-rgb), 0.1), 
+                  0 4px 6px -2px rgba(var(--primary-rgb), 0.05);
+    }
+
+    /* Add smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px; /* Account for fixed navbar */
+    }
+
+    /* Section transitions */
+    .section {
+      position: relative;
+      z-index: 1;
+      background-color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .section:not(:first-child) {
+      position: relative;
+      margin-top: -1px;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(var(--primary-rgb), 0.1),
+        transparent
+      );
+    }
+
+    /* Add new animations and styles */
+    .landing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 
+        0 30px 60px rgba(153, 27, 27, 0.35),
+        0 15px 30px rgba(153, 27, 27, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .hover-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .hover-btn:first-child:hover {
+      background: #ffffff;
+      color: rgb(127, 29, 29);
+    }
+
+    .hover-btn:last-child:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: white;
+    }
+
+    .hover-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%) scale(0);
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+    }
+
+    .hover-btn:hover::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include the Navbar -->
+  <div id="navbar-container"></div>
+  
+  <!-- Landing Section -->
+  <section class="landing-section" style="
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url(./images/banner.png);
+    /* background: linear-gradient(135deg, rgba(185, 28, 28, 0.97), rgba(153, 27, 27, 0.95)); */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    padding: 6rem 1rem;
+    margin-bottom: 0;
+    overflow: hidden;
+  ">
+    <div class="landing-card" style="
+      max-width: 1000px;
+      width: 90%;
+      background: rgba(255, 0, 0, 0.225);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 20px 50px rgba(153, 27, 27, 0.3),
+        0 10px 20px rgba(153, 27, 27, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+      transform: translateY(0);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    "
+    onmousemove="handleMouseMove(event)"
+    onmouseleave="handleMouseLeave(event)"
+    >
+      <div class="card-content" style="position: relative; z-index: 1;">
+        <h1 style="
+          font-size: clamp(2.5rem, 5vw, 4.5rem);
+          font-weight: 800;
+          margin-bottom: 1.5rem;
+          line-height: 1.2;
+          text-shadow: 0 2px 4px rgba(153, 27, 27, 0.2);
+          animation: slideInUp 0.8s ease-out forwards;
+          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: transform 0.3s ease;
+        ">About Motherland Academy School</h1>
+        <p style="
+          font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+          line-height: 1.8;
+          margin-bottom: 2rem;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          animation: fadeIn 1s ease-out 0.3s forwards;
+          opacity: 0.95;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          transition: all 0.3s ease;
+        ">Discover our rich history, core values, and the dedicated team shaping the future of education at Motherland Academy School.</p>
+        <div style="
+          animation: fadeIn 1s ease-out 0.6s forwards;
+          display: flex;
+          gap: 1.5rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        ">
+          <a href="#mission" class="hover-btn" style="
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 100%);
+            color: rgb(153, 27, 27);
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+          ">Learn More</a>
+          <a href="#team" class="hover-btn" style="
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+          ">Meet Our Team</a>
+        </div>
+      </div>
+      <div class="card-shapes" style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        border-radius: 20px;
+        pointer-events: none;
+      ">
+        <div style="
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+          animation: rotate 20s linear infinite;
+        "></div>
+      </div>
+    </div>
+    <div style="
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    ">
+      <a href="#mission" style="
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      ">
+        <span style="font-size: 0.9rem; opacity: 0.9;">Scroll Down</span>
+        <i class="fas fa-chevron-down" style="font-size: 1.5rem; opacity: 0.9;"></i>
+      </a>
+    </div>
+  </section>
+  
+  <!-- Page Header -->
+ <!-- <header class="page-header">
+    <div class="page-header-bg" style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+      <h1>About Us</h1>
+      <p>Learn about our mission, values, and the dedicated team behind Motherland Academy School</p>
+    </div>
+  </header> -->
+  
+  <!-- Mission Section -->
+  <section class="section" id="mission" style="background-color: white; padding: 6rem 0;">
+    <div class="container">
+      <div class="grid" style="grid-template-columns: 1fr; gap: 3rem;">
+        <div class="text-center">
+          <h2 class="section-title" style="animation: slideInUp 0.8s ease-out forwards;">Our Mission</h2>
+          <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.8; max-width: 800px; margin: 0 auto; animation: fadeIn 1s ease-out 0.3s forwards;">
+            At Motherland Academy School, our mission is to provide a nurturing educational environment that inspires students to achieve academic excellence while developing the character, creativity, and passion to thrive in an ever-changing world.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Values Section -->
+  <section class="section" style="background-color: var(--gray-50); padding: 6rem 0;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 class="section-title" style="animation: slideInUp 0.8s ease-out forwards;">Our Core Values</h2>
+        <p class="section-description" style="animation: fadeIn 1s ease-out 0.3s forwards; color: var(--text-muted); font-size: 1.25rem;">
+          The principles that guide our approach to education
+        </p>
+      </div>
+      
+      <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+        <!-- Value 1 -->
+        <div class="card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.1s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🌟</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Excellence</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We strive for excellence in all aspects of education, challenging our students to reach their highest potential.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 2 -->
+        <div class="card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.2s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Integrity</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We foster honesty, ethics, and responsibility in our students, preparing them to be principled leaders.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 3 -->
+        <div class="card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.3s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🧠</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Innovation</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We embrace creativity and forward-thinking approaches to learning and problem-solving.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 4 -->
+        <div class="card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.1s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Global Citizenship</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We encourage understanding and respect for diverse cultures and perspectives.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 5 -->
+        <div class="card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.2s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">💪</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Resilience</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We develop perseverance and adaptability in our students to overcome challenges.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 6 -->
+        <div class="card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.3s;">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Compassion</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              We nurture empathy and kindness, encouraging students to make positive contributions to society.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+ 
+  
+  <!-- Leadership Team Section -->
+  <section class="section" id="team" style="background-color: var(--gray-50); padding: 6rem 0;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 class="section-title" style="animation: slideInUp 0.8s ease-out forwards;">Our Leadership Team</h2>
+        <p class="section-description" style="animation: fadeIn 1s ease-out 0.3s forwards; color: var(--text-muted); font-size: 1.25rem;">
+          Meet the dedicated professionals guiding our institution
+        </p>
+      </div>
+      
+      <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem;">
+        <!-- Team Member 1 -->
+        <div class="team-member-card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.1s;">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Principal" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Dr. Sarah Mitchell</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Principal</p>
+          <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+            With over 20 years of experience in education, Dr. Mitchell leads our school with vision and dedication.
+          </p>
+        </div>
+        
+        <!-- Team Member 2 -->
+        <div class="team-member-card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.2s;">
+          <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Vice Principal" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">James Anderson</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Vice Principal</p>
+          <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+            James oversees academic programs and curriculum development with passion for educational excellence.
+          </p>
+        </div>
+        
+        <!-- Team Member 3 -->
+        <div class="team-member-card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.3s;">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Head of Student Affairs" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Dr. Maria Rodriguez</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Head of Student Affairs</p>
+          <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+            Maria ensures student wellness and creates an inclusive environment for all students to thrive.
+          </p>
+        </div>
+        
+        <!-- Team Member 4 -->
+        <div class="team-member-card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.4s;">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Director of Technology" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">David Chen</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Director of Technology</p>
+          <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+            David leads our digital transformation, integrating innovative technologies into learning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="section gradient-bg" style="padding: 6rem 0;">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <h2 class="section-title" style="color: white; animation: slideInUp 0.8s ease-out forwards;">Join Our School Community</h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.25rem; margin-bottom: 2rem; line-height: 1.6; animation: fadeIn 1s ease-out 0.3s forwards;">
+        Be part of our journey towards educational excellence and holistic development
+      </p>
+      <div style="animation: fadeIn 1s ease-out 0.6s forwards;">
+        <a href="contact.html" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700; padding: 1rem 2.5rem; border-radius: 50px; display: inline-block; transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+          Schedule a Visit
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Include the Footer -->
+  <div id="footer-container"></div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load Navbar
+      fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          
+          // After navbar is loaded, initialize navbar functionality from script.js
+          initNavbar();
+          
+          // After navbar is loaded, initialize scroll handler
+          const navbar = document.querySelector('.navbar');
+          let lastScroll = window.scrollY;
+
+          // Handle navbar visibility on scroll
+          window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            
+            // Add/remove scrolled class based on scroll position
+            if (currentScroll > 50) {
+              navbar.classList.add('scrolled');
+            } else {
+              navbar.classList.remove('scrolled');
+            }
+
+            // Update last scroll position
+            lastScroll = currentScroll;
+          });
+        });
+      
+      // Load Footer
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        });
+
+      // Initialize smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      function handleMouseMove(event) {
+        const card = event.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      }
+
+      function handleMouseLeave(event) {
+        const card = event.currentTarget;
+        card.style.transform = 'translateY(0)';
+      }
+    });
+  </script>
+</body>
+</html> 

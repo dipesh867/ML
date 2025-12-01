@@ -1,0 +1,182 @@
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <!-- Footer wave shape -->
+    <div class="footer-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="#991b1b">
+        <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+      </svg>
+    </div>
+    
+    <div class="footer-grid">
+      <!-- School Info -->
+      <div class="footer-info reveal">
+        <div class="footer-logo">
+          <div class="logo-icon  scale-on-hover">
+        <img src="logo.png" alt="Motherland Academy School Logo" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
+          <span class="gradient-text">Motherland Academy School</span>
+        </div>
+        <p class="footer-description">
+          Empowering minds, building futures. Motherland Academy School is committed to providing 
+          quality education that nurtures creativity, critical thinking, and character 
+          development in every student.
+        </p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter" class="stagger-delay-1">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/MotherlandAcademyBrt" target="_blank" aria-label="Facebook" class="stagger-delay-2">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" aria-label="Instagram" class="stagger-delay-3">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" aria-label="YouTube" class="stagger-delay-4">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links reveal delay-100">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="programs.html"><i class="fas fa-chevron-right"></i> Academic Programs</a></li>
+          <li><a href="admissions.html"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+          <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-contact reveal delay-200">
+        <h3>Contact Info</h3>
+        <div>
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Radha Raman Marg, Biratnagar</span>
+        </div>
+        <div>
+          <i class="fas fa-phone-alt"></i>
+          <span>9842041511</span>
+        </div>
+        <div>
+          <i class="fas fa-envelope"></i>
+          <span>info@MotherlandAcademy.edu</span>
+        </div>
+      </div>
+      
+      
+      
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        © 2024 Motherland Academy School. All rights reserved. | 
+        <span class="gradient-text">Empowering minds, building futures.</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Enhanced footer styles */
+  .footer {
+    position: relative;
+    margin-top: 5rem;
+  }
+  
+  .footer-wave {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+  }
+  
+  .footer-description {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .footer-social a {
+    font-size: 1.25rem;
+  }
+  
+  .footer-links ul li i {
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    color: var(--primary-light);
+    transition: all 0.3s ease;
+  }
+  
+  .footer-links ul li:hover i {
+    transform: translateX(3px);
+  }
+  
+  .footer-contact i {
+    font-size: 1.25rem;
+    width: 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-newsletter p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    margin-top: 1rem;
+  }
+  
+  .newsletter-form input {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: var(--radius) 0 0 var(--radius);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .newsletter-form input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .newsletter-form button {
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0 1rem;
+    background: var(--primary);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .newsletter-form button:hover {
+    background: var(--primary-dark);
+  }
+  
+  /* Animation for footer sections */
+  @media (min-width: 768px) {
+    .footer-info, .footer-links, .footer-contact, .footer-newsletter {
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+    
+    .footer-info.active, .footer-links.active, .footer-contact.active, .footer-newsletter.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style> 

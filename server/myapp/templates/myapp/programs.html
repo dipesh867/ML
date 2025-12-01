@@ -1,0 +1,485 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Motherland Academy School</title>
+<link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="{% static 'myapp/js/script.js' %}" defer></script>
+  <style>
+    /* Page-specific styles */
+    .page-header {
+      margin-top: 10vh;
+;
+      position: relative;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+    
+    .page-header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .page-header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255, 255, 255, 0), rgba(185, 28, 28, 0.8));
+    }
+    
+    .page-header-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 64rem;
+      padding: 0 1rem;
+    }
+    
+    .program-section {
+      padding: 6rem 0;
+      position: relative;
+    }
+    
+    .program-section:nth-child(odd) {
+      background-color: var(--gray-50);
+    }
+    
+    .program-section:nth-child(even) {
+      background-color: white;
+    }
+    
+    .program-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .program-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .feature-icon {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .curriculum-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .curriculum-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-200);
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .curriculum-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .curriculum-list li::before {
+      content: "✓";
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    .program-image {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .program-image:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Enhanced Animation for Programs Page */
+    @keyframes float-up-down {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    .float-animation {
+      animation: float-up-down 3s ease-in-out infinite;
+    }
+    
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    
+    @media (min-width: 768px) {
+      .program-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="page-transition">
+  <!-- Include the Navbar -->
+  <div id="navbar-container" ></div>
+  
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="page-header-bg" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+      <h1 class="hero-title slide-up text-shadow">Academic Programs</h1>
+      <p class="hero-subtitle fade-in text-shadow">
+        Comprehensive education designed to nurture every student's potential
+      </p>
+    </div>
+  </header>
+  
+  <!-- Program Overview -->
+  <section class="section" style="background-color: white;">
+    <div class="container">
+      <div class="text-center reveal">
+        <h2 class="section-title">Empowering Education for Every Stage</h2>
+        <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+          At Motherland Academy School, we offer a well-rounded curriculum that balances academic rigor with creative expression and character development. Our programs are designed to meet students where they are and help them grow into confident, capable individuals.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Primary Education Program -->
+  <section class="program-section">
+    <div class="container">
+      <div class="program-grid">
+        <div class="reveal-left">
+          <div class="program-icon float-animation">🎨</div>
+          <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-dark);">Primary Education</h2>
+          <p style="color: var(--primary); font-weight: 600; font-size: 1.25rem; margin-bottom: 1.5rem;">Grades 1-5</p>
+          <p style="color: var(--text-muted); font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+            Our primary education program creates a strong foundation for lifelong learning. Through a blend of structured lessons and play-based activities, we foster curiosity, creativity, and essential skills in a nurturing environment.
+          </p>
+          
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Core Curriculum</h3>
+          <ul class="curriculum-list">
+            <li>Language Arts & Reading</li>
+            <li>Mathematics & Basic Numeracy</li>
+            <li>Science & Environmental Studies</li>
+            <li>Social Studies & Cultural Awareness</li>
+            <li>Art, Music & Physical Education</li>
+            <li>Computer Skills & Digital Literacy</li>
+          </ul>
+          
+          <div class="program-features">
+            <div class="feature-card">
+              <div class="feature-icon">👥</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Small Class Sizes</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Maximum 20 students per class for personalized attention
+              </p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">🧠</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Hands-on Learning</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Interactive activities that make learning engaging and fun
+              </p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">📚</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Reading Program</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Structured literacy development with daily reading time
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="reveal-right delay-200">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Primary Education" class="program-image">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Middle School Program -->
+  <section class="program-section">
+    <div class="container">
+      <div class="program-grid">
+        <div class="reveal-right delay-200 order-2 order-md-1">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Middle School Education" class="program-image">
+        </div>
+        
+        <div class="reveal-left order-1 order-md-2">
+          <div class="program-icon float-animation">📚</div>
+          <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-dark);">Secondary School</h2>
+          <p style="color: var(--primary); font-weight: 600; font-size: 1.25rem; margin-bottom: 1.5rem;">Grades 6-10</p>
+          <p style="color: var(--text-muted); font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+            Our Secondary school program supports students during this crucial transitional period. We focus on developing critical thinking, independent learning skills, and deeper subject knowledge while providing social-emotional support.
+          </p>
+          
+          <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Core Curriculum</h3>
+          <ul class="curriculum-list">
+            <li>Language Arts & Literature</li>
+            <li>Advanced Mathematics</li>
+            <li>Life & Physical Sciences</li>
+            <li>History & Social Studies</li>
+            <li>Foreign Language Introduction</li>
+            <li>Technology & Computer Science</li>
+            <li>Arts, Music & Physical Education</li>
+          </ul>
+          
+          <div class="program-features">
+            <div class="feature-card">
+              <div class="feature-icon">🔍</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Project-Based Learning</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Collaborative projects that develop research and teamwork skills
+              </p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">💻</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Technology Integration</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Digital literacy and responsible technology use
+              </p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">🌟</div>
+              <h4 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text-dark);">Leadership Development</h4>
+              <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                Opportunities for students to develop leadership qualities
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  <!-- Extracurricular Activities -->
+  <section class="section" style="background-color: var(--gray-50);">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 class="section-title reveal">Extracurricular Activities</h2>
+        <p class="section-description reveal delay-100">
+          Beyond academics, we offer a wide range of activities to develop well-rounded students
+        </p>
+      </div>
+      
+      <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+        <!-- Activity 1 -->
+        <div class="card reveal delay-100">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🏀</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Sports</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Basketball, Soccer, Tennis, Track & Field, Swimming, and more. Our sports programs teach teamwork, discipline, and healthy competition.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Activity 2 -->
+        <div class="card reveal delay-200">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎭</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Arts & Music</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Drama Club, Choir, Band, Orchestra, Visual Arts, and Dance. Students express themselves creatively and build confidence.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Activity 3 -->
+        <div class="card reveal delay-300">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🔬</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Academic Clubs</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Science Club, Math Team, Debate, Model UN, Robotics, and Coding Club. Students explore academic interests beyond the classroom.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Activity 4 -->
+        <div class="card reveal delay-100">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Community Service</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Volunteer opportunities, service learning projects, and community outreach. Students develop empathy and social responsibility.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Activity 5 -->
+        <div class="card reveal delay-200">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📰</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Student Media</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              School Newspaper, Yearbook Committee, Podcast Team, and Digital Media. Students develop communication and journalism skills.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Activity 6 -->
+        <div class="card reveal delay-300">
+          <div class="card-content text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🌱</div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Student Leadership</h3>
+            <p style="color: var(--text-muted); line-height: 1.6;">
+              Student Council, Peer Mentoring, and Leadership Academy. Students develop leadership skills and contribute to school culture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="section gradient-bg">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <h2 class="section-title reveal" style="color: white;">Ready to Join Our Programs?</h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.25rem; margin-bottom: 2rem; line-height: 1.6;" class="reveal delay-100">
+        Take the first step towards a comprehensive education that prepares your child for success
+      </p>
+      <div class="reveal delay-200">
+        <a href="admissions.html" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
+          Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Include the Footer -->
+  <div id="footer-container"></div>
+  
+  <script>
+    // Load the navbar and footer
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load Navbar
+      fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar-container').innerHTML = data;
+          // Initialize navbar functionality after loading
+          initNavbar();
+        });
+      
+      // Load Footer
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        });
+      
+      // Scroll reveal animation
+      function revealOnScroll() {
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        
+        for (let i = 0; i < reveals.length; i++) {
+          const windowHeight = window.innerHeight;
+          const elementTop = reveals[i].getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add('active');
+          }
+        }
+      }
+      
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll(); // Call once to check for elements in view on load
+    });
+  </script>
+</body>
+</html> 

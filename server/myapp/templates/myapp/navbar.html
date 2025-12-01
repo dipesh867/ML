@@ -1,0 +1,272 @@
+<!-- Navigation Bar -->
+<nav class="navbar navbar-transparent" id="navbar">
+  <div class="container navbar-container">
+    <!-- Logo -->
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-icon  scale-on-hover">
+        <img src="logo.png" alt="MotherLand Academy School Logo" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <span class=" slide-in-right" style="font-size: 1.25rem; font-weight: bold; transition: all 0.4s ease;" id="logo-text">Motherland Academy</span>
+    </a>
+
+    <!-- Mobile Toggle Button -->
+    <div class="navbar-toggle" id="navbar-toggle">
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="navbar-menu" id="navbar-menu">
+      <div class="menu-wrapper">
+        
+        <a href="index.html" class="menu-item stagger-delay-1" >
+          <i class="fas fa-home" style="color: value;"></i> Home
+        </a>
+        <a href="about.html" class="menu-item stagger-delay-2">
+          <i class="fas fa-school"></i> About
+        </a>
+        <a href="programs.html" class="menu-item stagger-delay-3">
+          <i class="fas fa-book-open"></i> Programs
+        </a>
+        <a href="gallery.html" class="menu-item stagger-delay-4">
+          <i class="fas fa-images"></i> Gallery
+        </a>
+        <a href="contact.html" class="menu-item stagger-delay-5">
+          <i class="fas fa-envelope"></i> Contact
+        </a>
+        <a href="admissions.html" class="btn btn-primary stagger-delay-6">
+          <i class="fas fa-graduation-cap"></i> Apply Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Additional navbar styles */
+  .navbar-toggle .toggle-bar {
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-toggle.active .toggle-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .navbar-toggle.active .toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .navbar-toggle.active .toggle-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  /* Hide toggle on desktop */
+  @media (min-width: 768px) {
+    .navbar-toggle {
+      display: none;
+    }
+  }
+  
+  .menu-item i {
+    margin-right: 8px;
+    color: #ed1b29;
+  }
+  
+  @media (max-width: 767px) {
+    .navbar-toggle.active{
+  opacity:1;
+}
+
+    .menu-item {
+      margin-bottom: 1rem;
+    }
+    
+    .navbar-menu .btn {
+      /* margin-top: 1rem;   */
+      display: inline-block;
+    }
+    
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+    }
+  }
+  
+  .navbar-transparent .menu-item {
+    color: black;
+
+  }
+  
+  .navbar-scrolled .menu-item {
+    color: var(--text-dark);
+  }
+  
+  /* Add animation for menu items */
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @media (min-width: 768px) {
+    .menu-item{
+      opacity:1;
+    }
+  }
+  @media (max-width: 767px) {
+    .menu-item {
+      opacity: 0;
+      animation: fadeInRight 0.5s ease forwards;
+    }
+    
+    .navbar-menu.active .menu-item {
+      opacity: 1;
+    }
+  }
+  /* Ensure navbar stays on top */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 100vw;
+  z-index: 9999; /* HIGHER than hero section */
+}
+
+  /* Mobile menu overlay */
+.navbar-menu {
+  position: fixed; /* overlay above content */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95); /* dark overlay */
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9998; /* slightly less than navbar toggle but above hero */
+}
+
+/* When active */
+.navbar-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Desktop menu styles */
+@media (min-width: 768px) {
+  .navbar-menu {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    opacity: 1;
+    pointer-events: all;
+    z-index: auto;
+  }
+  
+  .menu-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .menu-item {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .menu-item:hover {
+    color: #ed1b29;
+  }
+}
+
+
+
+</style>
+
+<script>
+  // Get the navbar elements
+  const navbar = document.getElementById('navbar');
+  const navbarToggle = document.getElementById('navbar-toggle');
+  const navbarMenu = document.getElementById('navbar-menu');
+  const logoText = document.getElementById('logo-text');
+  
+  // Scroll event to change navbar style
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      navbar.classList.remove('navbar-transparent');
+      navbar.classList.add('navbar-scrolled');
+      
+      // Update text color for menu items
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => {
+        item.style.color = '#1f2937';
+      });
+      
+      // Show logo text
+      logoText.style.display = 'block';
+      logoText.style.color = '#1f2937';
+      navbarToggle.style.color = '#1f2937';
+    } else {
+      navbar.classList.add('navbar-transparent');
+      navbar.classList.remove('navbar-scrolled');
+      
+      // Reset text color for menu items
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach(item => {
+        item.style.color = 'white';
+      });
+      
+      // Hide logo text
+      logoText.style.display = 'none';
+      navbarToggle.style.color = 'white';
+    }
+  });
+  
+  // Toggle mobile menu
+  navbarToggle.addEventListener('click', function() {
+    navbarMenu.classList.toggle('active');
+  });
+  
+  // Close mobile menu when clicking on a link
+  const menuLinks = document.querySelectorAll('.navbar-menu a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      navbarMenu.classList.remove('active');
+    });
+  });
+  
+  // Highlight current page in menu
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    menuItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (href === currentPage) {
+        item.classList.add('active');
+      }
+    });
+  });
+</script> 
