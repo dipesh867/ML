@@ -4,13 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Motherland Academy School</title>
+  <title> Admissio - Motherland Academy School</title>
 <link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="{% static 'myapp/js/script.js' %}" defer></script>
+
+</head>
+<body>
+  <style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
   <style>
     /* Page-specific styles */
     .page-header {
@@ -680,11 +688,22 @@
         padding: 0.75rem 0.5rem;
       }
     }
+
+/*it is forced visible */
+    .form-animated,
+.reveal,
+.accordion,
+#application-form {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  z-index: 1 !important;
+}
+
   </style>
-</head>
-<body>
+
+
   <!-- Include the Navbar -->
-  <div id="navbar-container"></div>
+   {% include 'myapp/navbar.html' %}
   
   <!-- Page Header -->
   <header class="page-header">
@@ -718,7 +737,7 @@ We are delighted that you are considering Motherland Academy School for your chi
             Complete and submit the online application form along with all required documents. A non-refundable application fee of $50 is required.
           </p>
           <p style="margin-top: 1rem;">
-            <a href="#application-form" class="btn btn-primary pulse-animation">Start Application</a>
+            <a href="#application-forms" class="btn btn-primary pulse-animation">Start Application</a>
           </p>
         </div>
         
@@ -751,7 +770,7 @@ We are delighted that you are considering Motherland Academy School for your chi
   
  
   <!-- Application Form Section -->
-  <section class="section" style="background-color: white;" id="application-form">
+  <section class="section" style="background-color: white;" id="application-forms">
     <div class="container">
       <div class="text-center" style="margin-bottom: 3rem;">
         <h2 class="section-title reveal">Start Your Application</h2>
@@ -761,26 +780,27 @@ We are delighted that you are considering Motherland Academy School for your chi
       </div>
       
       <div class="reveal delay-200" style="max-width: 800px; margin: 0 auto;">
-        <form action="#" method="post" id="application-form" class="form-animated">
+        <form action="{% url 'admission' %}" method="post" id="application-form" class="form-animated">
+          {% csrf_token %}
           <div class="form-row">
             <div class="form-group form-floating-label">
-              <input type="text" id="student-name" class="form-control" required>
+              <input type="text" id="student-name" class="form-control" name="name" required>
               <label for="student-name" class="form-label"><i class="fas fa-user"></i> Student's Full Name</label>
               <span class="form-highlight"></span>
             </div>
-            
+<!--             
             <div class="form-group form-floating-label">
               <input type="date" id="dob" class="form-control" required>
               <label for="dob" class="form-label"><i class="fas fa-calendar-alt"></i> Date of Birth</label>
               <span class="form-highlight"></span>
-            </div>
+            </div> -->
           </div>
           
           <div class="form-section-title">
             <i class="fas fa-graduation-cap"></i> Grade Applying For
           </div>
           <div class="form-group form-floating-label">
-              <select id="grades" class="form-control" required>
+              <select id="grades" class="form-control" name="grade" required>
                 <option value=""></option>
                 <option value="1">Grade 1</option>
                 <option value="2">Grade 2</option>
@@ -794,7 +814,7 @@ We are delighted that you are considering Motherland Academy School for your chi
                 <option value="10">Grade 10</option>
                
               </select>
-              <label for="how-heard" class="form-label"><i class="fas fa-info-circle"></i> Which grade do you want to roll in?</label>
+              <label for="grades" class="form-label"><i class="fas fa-info-circle"></i> Which grade do you want to roll in?</label>
               <span class="form-highlight"></span>
             </div>
         
@@ -804,14 +824,14 @@ We are delighted that you are considering Motherland Academy School for your chi
           </div>
           <div class="form-row">
             <div class="form-group form-floating-label">
-              <input type="text" id="parent-name" class="form-control" required>
+              <input type="text" id="parent-name" class="form-control" name="parent_name" required>
               <label for="parent-name" class="form-label"><i class="fas fa-user-tie"></i> Parent/Guardian Name</label>
               <span class="form-highlight"></span>
             </div>
           
          
             <div class="form-group form-floating-label">
-              <input type="tel" id="phone" class="form-control" required>
+              <input type="tel" id="phone" class="form-control" name="phone" required>
               <label for="phone" class="form-label"><i class="fas fa-phone"></i> Phone</label>
               <span class="form-highlight"></span>
             </div>
@@ -924,7 +944,7 @@ We are delighted that you are considering Motherland Academy School for your chi
         Our Admissions team is here to help you through every step of the process
       </p>
       <div class="reveal delay-200">
-        <a href="contact.html" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
+        <a href="{% url 'contact' %}" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
           Contact Admissions
         </a>
       </div>
@@ -932,7 +952,7 @@ We are delighted that you are considering Motherland Academy School for your chi
   </section>
   
   <!-- Include the Footer -->
-  <div id="footer-container"></div>
+ {% include 'myapp/footer.html' %}
   
   <!-- JavaScript is now loaded from the external script.js file -->
   <script>
@@ -942,84 +962,84 @@ We are delighted that you are considering Motherland Academy School for your chi
       const formSection = document.getElementById('application-form');
       const applicationForm = document.getElementById('application-form');
       
-      if (applicationForm) {
-        // Form validation
-        applicationForm.addEventListener('submit', function(e) {
-          e.preventDefault();
+      // if (applicationForm) {
+      //   // Form validation
+      //   applicationForm.addEventListener('submit', function(e) {
+      //     e.preventDefault();
           
-          // Simple validation
-          let isValid = true;
-          const requiredFields = this.querySelectorAll('[required]');
+      //     // Simple validation
+      //     let isValid = true;
+      //     const requiredFields = this.querySelectorAll('[required]');
           
-          requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-              isValid = false;
-              field.classList.add('invalid');
+      //     requiredFields.forEach(field => {
+      //       if (!field.value.trim()) {
+      //         isValid = false;
+      //         field.classList.add('invalid');
               
-              // Add shake animation
-              field.classList.add('shake');
-              setTimeout(() => {
-                field.classList.remove('shake');
-              }, 600);
+      //         // Add shake animation
+      //         field.classList.add('shake');
+      //         setTimeout(() => {
+      //           field.classList.remove('shake');
+      //         }, 600);
               
-              // Highlight parent container
-              const container = field.closest('.form-floating-label') || field.closest('.form-group');
-              if (container) {
-                container.classList.add('error');
-              }
-            } else {
-              field.classList.remove('invalid');
+      //         // Highlight parent container
+      //         const container = field.closest('.form-floating-label') || field.closest('.form-group');
+      //         if (container) {
+      //           container.classList.add('error');
+      //         }
+      //       } else {
+      //         field.classList.remove('invalid');
               
-              // Remove error from parent container
-              const container = field.closest('.form-floating-label') || field.closest('.form-group');
-              if (container) {
-                container.classList.remove('error');
-              }
-            }
-          });
+      //         // Remove error from parent container
+      //         const container = field.closest('.form-floating-label') || field.closest('.form-group');
+      //         if (container) {
+      //           container.classList.remove('error');
+      //         }
+      //       }
+      //     });
           
-          // If form is valid, show success message
-          if (isValid) {
-            const formSuccess = document.getElementById('form-success');
-            if (formSuccess) {
-              // Add success animation
-              formSuccess.style.display = 'block';
-              formSuccess.classList.add('fade-in');
+      //     // If form is valid, show success message
+      //     if (isValid) {
+      //       const formSuccess = document.getElementById('form-success');
+      //       if (formSuccess) {
+      //         // Add success animation
+      //         formSuccess.style.display = 'block';
+      //         formSuccess.classList.add('fade-in');
               
-              // Scroll to success message
-              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      //         // Scroll to success message
+      //         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
               
-              // Reset form
-              this.reset();
+      //         // Reset form
+      //         this.reset();
               
-              // Hide success message after 5 seconds
-              setTimeout(() => {
-                formSuccess.classList.remove('fade-in');
-                formSuccess.classList.add('fade-out');
+      //         // Hide success message after 5 seconds
+      //         setTimeout(() => {
+      //           formSuccess.classList.remove('fade-in');
+      //           formSuccess.classList.add('fade-out');
                 
-                setTimeout(() => {
-                  formSuccess.style.display = 'none';
-                  formSuccess.classList.remove('fade-out');
-                }, 500);
-              }, 5000);
-            }
-          }
-        });
+      //           setTimeout(() => {
+      //             formSuccess.style.display = 'none';
+      //             formSuccess.classList.remove('fade-out');
+      //           }, 500);
+      //         }, 5000);
+      //       }
+      //     }
+      //   });
         
-        // Clear error state on input
-        const formFields = applicationForm.querySelectorAll('input, textarea, select');
-        formFields.forEach(field => {
-          field.addEventListener('input', function() {
-            this.classList.remove('invalid');
+      //   // Clear error state on input
+      //   const formFields = applicationForm.querySelectorAll('input, textarea, select');
+      //   formFields.forEach(field => {
+      //     field.addEventListener('input', function() {
+      //       this.classList.remove('invalid');
             
-            // Remove error from parent container
-            const container = this.closest('.form-floating-label') || this.closest('.form-group');
-            if (container) {
-              container.classList.remove('error');
-            }
-          });
-        });
-      }
+      //       // Remove error from parent container
+      //       const container = this.closest('.form-floating-label') || this.closest('.form-group');
+      //       if (container) {
+      //         container.classList.remove('error');
+      //       }
+      //     });
+      //   });
+      // }
       
       // Enhanced Accordion functionality
       const accordionItems = document.querySelectorAll('.accordion-item');

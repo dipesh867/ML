@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Motherland Academy School</title>
+  <title> Contact - Motherland Academy School</title>
 <link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="{% static 'myapp/js/script.js' %}" defer></script>
+  <style>
     /* Page-specific styles */
     .page-header {
       position: relative;
@@ -167,7 +168,7 @@
 </head>
 <body>
   <!-- Include the Navbar -->
-  <div id="navbar-container"></div>
+  {% include 'myapp/navbar.html' %}
   
   <!-- Page Header -->
   <header class="page-header">
@@ -234,6 +235,7 @@
     </div>
   </section>
    <!-- Contact Form Section -->
+    <!-- Contact Form Section -->
   <section class="section" style="background-color: white;">
     <div class="container">
       <div class="grid" style="grid-template-columns: 1fr; gap: 3rem;">
@@ -245,7 +247,8 @@
         </div>
         
         <div class="reveal delay-200" style="max-width: 800px; margin: 0 auto;">
-          <form action="#" method="post" id="contact-form">
+          <form action="{% url 'contact' %}" method="post" id="contact-form" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="form-row">
               <div class="form-group">
                 <label for="name" class="form-label">Full Name</label>
@@ -266,13 +269,14 @@
               
               <div class="form-group">
                 <label for="subject" class="form-label">Subject</label>
-                <select id="subject" name="subject" class="form-control" required>
-                  <option value="" selected disabled>Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="admissions">Admissions</option>
-                  <option value="academics">Academics</option>
-                  
-                </select>
+<select id="subject" name="subject" class="form-control" required>
+    <option value="" disabled >Select a subject</option>
+    <option value="general">General Inquiry</option>
+    <option value="admissions">Admissions</option>
+    <option value="academics">Academics</option>
+</select>
+
+
               </div>
             </div>
             
@@ -319,7 +323,7 @@
   </section>
   
   <!-- Include the Footer -->
-  <div id="footer-container"></div>
+ {% include 'myapp/footer.html' %}
   
   <!-- JavaScript is now loaded from the external script.js file -->
   <script>
@@ -328,24 +332,7 @@
       const contactForm = document.getElementById('contact-form');
       const formSuccess = document.getElementById('form-success');
       
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          // In a real implementation, you would send the form data to a server here
-          // For demo purposes, we'll just show the success message
-          formSuccess.style.display = 'block';
-          contactForm.reset();
-          
-          // Scroll to success message
-          formSuccess.scrollIntoView({ behavior: 'smooth' });
-          
-          // Hide success message after 5 seconds
-          setTimeout(() => {
-            formSuccess.style.display = 'none';
-          }, 5000);
-        });
-      }
+      
       function revealOnScroll() {
         const reveals = document.querySelectorAll('.reveal');
         

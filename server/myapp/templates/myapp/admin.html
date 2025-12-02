@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -237,17 +238,25 @@
                     <th>Message</th>
                     <th>Actions</th>
                 </tr>
+                <style>
+                    .delete-btn a{
+    color: white;
+    text-decoration: none;
+                    }
+                </style>
+                {% for i in contact %}
                 <tr>
-                    <td>Ram</td>
-                    <td>ram@mail.com</td>
-                    <td>919191911</td>
-                    <td>Enquiry</td>
-                    <td>Inquiry about school fees.</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.subject}}</td>
+                    <td>{{i.message}}</td>
                     <td class="actions">
                         <button class="verify-btn" onclick="markVerified(this)">Mark</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                        <button class="delete-btn" onclick="deleteRow(this)"><a href="{% url 'delete_contact' i.id%}">Delete</a></button>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
         </div>
 
@@ -262,16 +271,18 @@
                     <th>Phone</th>
                     <th>Actions</th>
                 </tr>
+                {% for i in admission %}
                 <tr>
-                    <td>Sita</td>
-                    <td>Grade 4</td>
-                    <td>shyamkumari</td>
-                    <td>9812345678</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.grade }}</td>
+                    <td>{{ i.parent_name }}</td>
+                    <td>{{ i.phone }}</td>
                     <td class="actions">
                         <button class="verify-btn" onclick="markVerified(this)">Mark</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                         <button class="delete-btn" onclick="deleteRow(this)"><a href="{% url 'delete_admission' i.id%}">Delete</a></button>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
         </div>
 
@@ -302,9 +313,7 @@ function showSection(id) {
 }
 
 // DELETE row
-function deleteRow(btn){
-    btn.parentElement.parentElement.remove();
-}
+
 
 // MARK verified
 function markVerified(btn){
@@ -340,6 +349,12 @@ function deletePhoto(button){
 }
 
 </script>
+<script>
+window.addEventListener("beforeunload", function() {
+    navigator.sendBeacon("{% url 'admin_logout' %}");
+});
+</script>
+
 
 </body>
 </html>

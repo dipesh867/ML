@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Motherland Academy School</title>
+  <title>Home - Motherland Academy School</title>
 <link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
 
@@ -1766,12 +1766,25 @@
 <body>
   <div id="adminLoginModal">
   <div class="login-box">
-    <h2>Admin Login</h2>
+    <form method="post" action="{% url 'admin_login' %}">
+  {% csrf_token %}
+  <h2>Superuser Login</h2>
+<input id="adminUser" type="text" placeholder="Username" name="username">
+    <input id="adminPass" type="password" placeholder="Password" name="password">
+  <button type="submit" class="login-btn">Login</button>
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color:red;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+</form>
+    <!-- <h2>Admin Login</h2>
     <input id="adminUser" type="text" placeholder="Username">
     <input id="adminPass" type="password" placeholder="Password">
-    <button class="login-btn" onclick="loginAdmin()">Login</button>
+    <button class="login-btn">Login</button> -->
   </div>
 </div>
+
   <!-- Include the Navbar -->
     {% include 'myapp/navbar.html' %}
   <!-- <div id="navbar-container"></div> -->
@@ -1788,11 +1801,11 @@
           Where education meets innovation that helps your child grow into tomorrow's leaders
         </p>
         <div class="hero-cta">
-          <a href="admissions.html" class="primary-btn">
+          <a href="{% url 'admission' %}" class="primary-btn">
             <span>Get Started</span>
             <i class="fas fa-arrow-right"></i>
           </a>
-          <a href="#programs" class="text-btn">
+          <a href="{% url 'program' %}" class="text-btn">
             <i class="fas fa-play-circle"></i>
             <span>Explore Classes</span>
           </a>
@@ -1802,7 +1815,7 @@
       <!-- Right Image Area with Feature Cards -->
       <div class="hero-content-right">
         <div class="hero-image-container">
-          <img src="images/hero4.png" 
+          <img  src="{% static 'myapp/images/hero4.png' %}" 
                alt="Students in modern classroom" class="hero-image">
           
           <!-- Feature Cards -->
@@ -2064,10 +2077,10 @@
         Take the first step towards your child's bright future at Motherland Academy School
       </p>
       <div class="hero-buttons reveal delay-200">
-        <a href="admissions.html" class="btn btn-primary btn-lg glow-effect">
+        <a href="{% url 'admission' %}" class="btn btn-primary btn-lg glow-effect">
           Start Application
         </a>
-        <a href="contact.html" class="btn btn-outline btn-lg">
+        <a href="{% url 'contact' %}" class="btn btn-outline btn-lg">
           Schedule Visit
         </a>
       </div>
@@ -2235,7 +2248,7 @@
   {% include 'myapp/footer.html' %}
 
   <!-- JavaScript is now loaded from the external script.js file -->
-  <script>
+<script>
     // Team Section Slider Functionality
     let currentSlide = 0;
     const slides = document.querySelectorAll('.team-card');
@@ -2442,17 +2455,33 @@ document.addEventListener("keydown", (e) => {
 });
 
 // === Admin Authentication ===
-function loginAdmin() {
-  let user = document.getElementById("adminUser").value;
-  let pass = document.getElementById("adminPass").value;
+// function loginAdmin() {
+//   let user = document.getElementById("adminUser").value;
+//   let pass = document.getElementById("adminPass").value;
 
-  if (user === "motherland" && pass === "admin123") {
-    window.location.href = "admin.html";
-  } else {
-    alert("Incorrect Username or Password");
-  }
-}
+//   if (user === "motherland" && pass === "admin123") {
+//     window.location.href = "admin.html";
+//   } else {
+//     alert("Incorrect Username or Password");
+//   }
+// }
 </script>
+{% if open_modal %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Re-open modal
+    document.getElementById("adminLoginModal").style.display = "flex";
+
+    // Clear old inputs
+    document.getElementById("adminUser").value = "";
+    document.getElementById("adminPass").value = "";
+
+    // Optional: change login button text to "Try again"
+    document.getElementById("adminLoginBtn").textContent = "Try Again";
+});
+</script>
+{% endif %}
 
 </body>
 

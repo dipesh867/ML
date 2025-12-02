@@ -527,7 +527,8 @@
 </head>
 <body>
   <!-- Include the Navbar -->
-  <div id="navbar-container"></div>
+      {% include 'myapp/navbar.html' %}
+
   
   <!-- Landing Section -->
   <section class="landing-section" style="
@@ -848,7 +849,7 @@
   </section>
   
   <!-- Include the Footer -->
-  <div id="footer-container"></div>
+  {% include 'myapp/footer.html' %}
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
