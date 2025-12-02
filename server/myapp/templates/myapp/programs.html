@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Motherland Academy School</title>
+  <title>Programs - Motherland Academy School</title>
 <link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
 
@@ -204,7 +204,7 @@
 </head>
 <body class="page-transition">
   <!-- Include the Navbar -->
-  <div id="navbar-container" ></div>
+  {% include 'myapp/navbar.html' %}
   
   <!-- Page Header -->
   <header class="page-header">
@@ -433,7 +433,7 @@
         Take the first step towards a comprehensive education that prepares your child for success
       </p>
       <div class="reveal delay-200">
-        <a href="admissions.html" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
+        <a href="{% url 'admission' %}" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
           Apply Now
         </a>
       </div>
@@ -441,7 +441,7 @@
   </section>
   
   <!-- Include the Footer -->
-  <div id="footer-container"></div>
+  {% include 'myapp/footer.html' %}
   
   <script>
     // Load the navbar and footer

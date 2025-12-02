@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Motherland Academy School</title>
+  <title>Gallery- Motherland Academy School</title>
 <link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
 <link rel="stylesheet" href="{% static 'myapp/css/animation.css' %}">
 
@@ -241,7 +241,7 @@
 </head>
 <body>
   <!-- Include the Navbar -->
-  <div id="navbar-container"></div>
+  {% include 'myapp/navbar.html' %}
   
   <!-- Page Header -->
   <header class="page-header">
@@ -482,7 +482,7 @@
   </section>
   
   <!-- Include the Footer -->
-  <div id="footer-container"></div>
+  {% include 'myapp/footer.html' %}
   
   <script>
     // Load the navbar and footer
