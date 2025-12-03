@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,43 +103,30 @@
 <body>
 
 <div class="login-box">
-    <h2>Admin Login</h2>
-    <p class="subtitle">Motherland Academy • Secure Access</p>
 
-    <label>Username</label>
-    <input type="text" id="username" placeholder="Enter admin username">
+
+<form action="{% url 'admin_login' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+         <h2>Admin Login</h2>
+    <p class="subtitle">Motherland Academy • Secure Access</p>
+        
+        <label>Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter admin username">
 
     <label>Password</label>
-    <input type="password" id="password" placeholder="Enter password">
+    <input type="password" id="password" name="password" placeholder="Enter password">
 
-    <button class="login-btn" onclick="login()">Login</button>
+    <button type="submit" class="login-btn">Login</button>
+    </form>
+
     <div class="" style="margin-top: 10px; text-align: center;">
-    <a href="index.html" >gotoHomePage</a>
+    <a href="{% url 'home' %}" >gotoHomePage</a>
 </div>
     <p class="error" id="errorBox">Invalid username or password!</p>
 </div>
 
 
-<script>
-function login() {
-    const user = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value.trim();
-    const errorBox = document.getElementById("errorBox");
 
-    // --- SIMPLE DEMO CREDENTIALS ---
-    let adminUser = "motherland";
-    let adminPass = "admin@123";
-
-    if (user === adminUser && pass === adminPass) {
-        errorBox.style.display = "none";
-
-        // REDIRECT to admin panel
-        window.location.href = "admin.html";
-    } else {
-        errorBox.style.display = "block";
-    }
-}
-</script>
 
 </body>
 </html>

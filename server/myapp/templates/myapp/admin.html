@@ -212,7 +212,9 @@
             <button onclick="showSection('contacts')">📩 Contact Messages</button>
             <button onclick="showSection('admissions')">🎓 Admissions</button>
             <button onclick="showSection('gallery')">🖼️ Gallery</button>
-            <button class="logout">LogOut</button>
+            <form action="{% url 'admin_logout' %}" method="get">
+    <button type="submit" class="logout">Logout</button>
+</form>
         </div>
     </div>
 

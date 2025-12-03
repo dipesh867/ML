@@ -3,52 +3,37 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from myapp.models import Contact,Admission,EventImage,Event
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
 def admin_logout(request):
     logout(request)
-    request.session.flush()  # clear all session data
     return redirect('home')
 
 
 
+
 def admin_login_view(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is None or not user.is_superuser:
-            messages.error(request, "Wrong username or not a superuser")
-            return render(request, "myapp/index.html", {"open_modal": True})
-
-        # Log the user in
-        login(request, user)
-
-        request.session['admin_authenticated'] = True
-
-        return redirect("admin")  # go to dashboard
-
-    # If GET request, go to home
+    if request.method=="POST":
+        username=request.POST.get("username")
+        password=request.POST.get("password")
+    
+        user=authenticate(username=username,password=password)
+        if user==None:
+            messages.error(request,"Invalid credentials")
+            return redirect('admin_login') 
+        else:
+            login(request,user)
+            return redirect('admin')
     return render(request,"myapp/admin_login.html")
 
 
+
+
+@login_required(login_url="admin_login")
 def Admin_API(request):
-    # Must have logged-in session from modal
-    if not request.session.get('admin_authenticated', False):
-        # Log out any previous login
-        logout(request)
-        # Redirect to home which shows the modal
-        return redirect('admin_login')  
-
-    # Optional: extra superuser check
-    if not request.user.is_superuser:
-        logout(request)
-        return redirect('admin_login')
-
-    # Normal dashboard
     contact = Contact.objects.all()
     admission = Admission.objects.all()
     return render(request, 'myapp/admin.html', {'contact': contact, 'admission': admission})
