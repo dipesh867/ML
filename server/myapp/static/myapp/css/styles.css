@@ -541,6 +541,7 @@ p {
 }
 
 .menu-item {
+  color: black;
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: var(--radius);
@@ -593,6 +594,7 @@ p {
   }
   
   .menu-item {
+    color: black !important;
     margin-bottom: 0;
     margin-left: 0.5rem;
   }

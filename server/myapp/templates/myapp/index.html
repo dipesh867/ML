@@ -2448,11 +2448,6 @@
 </script>
 <script>
 // === Shortcut Detection ===
-document.addEventListener("keydown", (e) => {
-  if (e.ctrlKey && e.shiftKey && e.key === "M") {
-    document.getElementById("adminLoginModal").style.display = "flex";
-  }
-});
 
 // === Admin Authentication ===
 // function loginAdmin() {
@@ -2482,6 +2477,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 {% endif %}
+<script>
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "m") {
+        window.location.href = "{% url 'admin_login' %}";
+    }
+});
+</script>
+
+
 
 </body>
 

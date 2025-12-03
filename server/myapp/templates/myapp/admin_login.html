@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login - Motherland Academy</title>
+
+    <style>
+        :root{
+            --primary:#ed1b29;
+            --secondary:#fef2f2;
+            --dark:#1a1a1a;
+            --light:#ffffff;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body{
+            background:var(--secondary);
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .login-box{
+            width:420px;
+            background:white;
+            padding:35px;
+            border-radius:15px;
+            box-shadow:0 0 18px rgba(0,0,0,0.15);
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+            from {transform:scale(0.8); opacity:0;}
+            to {transform:scale(1); opacity:1;}
+        }
+
+        h2{
+            text-align:center;
+            color:var(--primary);
+            margin-bottom:10px;
+        }
+        .subtitle{
+            text-align:center;
+            margin-bottom:25px;
+            color:#666;
+            font-size:14px;
+        }
+
+        label{
+            font-weight:600;
+            color:var(--primary);
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0 20px 0;
+            border-radius:8px;
+            border:1px solid #ccc;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus{
+            border-color:var(--primary);
+            box-shadow:0 0 5px rgba(237,27,41,0.3);
+        }
+
+        .login-btn{
+            width:100%;
+            padding:12px;
+            background:var(--primary);
+            border:none;
+            color:white;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .login-btn:hover{
+            opacity:0.85;
+        }
+
+        .error{
+            color:red;
+            text-align:center;
+            margin-top:10px;
+            display:none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+    <h2>Admin Login</h2>
+    <p class="subtitle">Motherland Academy • Secure Access</p>
+
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Enter admin username">
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter password">
+
+    <button class="login-btn" onclick="login()">Login</button>
+    <div class="" style="margin-top: 10px; text-align: center;">
+    <a href="index.html" >gotoHomePage</a>
+</div>
+    <p class="error" id="errorBox">Invalid username or password!</p>
+</div>
+
+
+<script>
+function login() {
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+    const errorBox = document.getElementById("errorBox");
+
+    // --- SIMPLE DEMO CREDENTIALS ---
+    let adminUser = "motherland";
+    let adminPass = "admin@123";
+
+    if (user === adminUser && pass === adminPass) {
+        errorBox.style.display = "none";
+
+        // REDIRECT to admin panel
+        window.location.href = "admin.html";
+    } else {
+        errorBox.style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>

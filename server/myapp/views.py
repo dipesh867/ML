@@ -27,13 +27,12 @@ def admin_login_view(request):
         # Log the user in
         login(request, user)
 
-        # ✅ Set session flag for modal login
         request.session['admin_authenticated'] = True
 
         return redirect("admin")  # go to dashboard
 
     # If GET request, go to home
-    return redirect('home')
+    return render(request,"myapp/admin_login.html")
 
 
 def Admin_API(request):

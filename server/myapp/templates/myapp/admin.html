@@ -121,15 +121,6 @@
             font-size:14px;
         }
 
-        .verify-btn{
-            background:#999;
-            color:white;
-        }
-
-        .verified{
-            background:#28a745 !important;
-        }
-
         .delete-btn{
             background:#ed1b29;
             color:white;
@@ -205,7 +196,9 @@
 .photo-card button:hover{
     opacity:0.8;
 }
-
+.menu .logout{
+   bottom: 0;
+}
     </style>
 </head>
 
@@ -219,6 +212,7 @@
             <button onclick="showSection('contacts')">📩 Contact Messages</button>
             <button onclick="showSection('admissions')">🎓 Admissions</button>
             <button onclick="showSection('gallery')">🖼️ Gallery</button>
+            <button class="logout">LogOut</button>
         </div>
     </div>
 
@@ -252,7 +246,6 @@
                     <td>{{i.subject}}</td>
                     <td>{{i.message}}</td>
                     <td class="actions">
-                        <button class="verify-btn" onclick="markVerified(this)">Mark</button>
                         <button class="delete-btn" onclick="deleteRow(this)"><a href="{% url 'delete_contact' i.id%}">Delete</a></button>
                     </td>
                 </tr>
@@ -278,7 +271,6 @@
                     <td>{{ i.parent_name }}</td>
                     <td>{{ i.phone }}</td>
                     <td class="actions">
-                        <button class="verify-btn" onclick="markVerified(this)">Mark</button>
                          <button class="delete-btn" onclick="deleteRow(this)"><a href="{% url 'delete_admission' i.id%}">Delete</a></button>
                     </td>
                 </tr>
@@ -302,6 +294,9 @@
 
             <h3>Preview</h3>
             <div class="gallery-preview" id="galleryPreview"></div>
+
+            <h3 style="margin-top: 3vh;">Uploaded Images</h3>
+            <div class="Uploads" id="Uploads"></div>
         </div>
 
     </div>
@@ -312,19 +307,30 @@ function showSection(id) {
     document.getElementById(id).classList.remove('hidden');
 }
 
-// DELETE row
 
-
-// MARK verified
-function markVerified(btn){
-    btn.classList.toggle('verified');
-    btn.textContent = btn.classList.contains('verified') ? "Verified" : "Mark";
-}
-
-// GALLERY PREVIEW
 // GALLERY PREVIEW
 document.getElementById('galleryInput').addEventListener('change', function(){
     let preview = document.getElementById('galleryPreview');
+    preview.innerHTML = "";
+    
+    Array.from(this.files).forEach((file, index)=>{
+        let reader = new FileReader();
+        reader.onload = function(e){
+            let card = document.createElement("div");
+            card.className = "photo-card";
+            card.innerHTML = `
+                <img src="${e.target.result}">
+                <p style="font-size:14px; margin-top:5px;">${file.name}</p>
+                <button class="delete-btn" style="margin-top:8px; padding:6px 12px;" onclick="deletePhoto(this)">Delete</button>
+            `;
+            preview.appendChild(card);
+        }
+        reader.readAsDataURL(file);
+    });
+});
+
+document.getElementById('Uploads').addEventListener('change', function(){
+    let preview = document.getElementById('Uploads');
     preview.innerHTML = "";
     
     Array.from(this.files).forEach((file, index)=>{
