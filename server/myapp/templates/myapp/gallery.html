@@ -274,136 +274,20 @@
         <div class="gallery-tab" data-filter="sports">Sports</div>
         <div class="gallery-tab" data-filter="arts">Arts & Culture</div>
       </div>
-      
-      <!-- Gallery Grid -->
-      <div class="gallery-grid" id="gallery-grid">
-        <!-- Campus Images -->
-        <div class="gallery-item reveal delay-100" data-category="campus">
-          <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="School Campus">
-          <div class="gallery-caption">
-            <h3>Main Building</h3>
-            <p>Our  main academic building</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-200" data-category="campus">
-          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="School Library">
-          <div class="gallery-caption">
-            <h3>School Library</h3>
-            <p>Our extensive library with over 20,000 books</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-300" data-category="campus">
-          <img src="https://images.unsplash.com/photo-1569685246889-1cf73fa5d810?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="School Playground">
-          <div class="gallery-caption">
-            <h3>Playground Area</h3>
-            <p>Modern playground facilities for primary students</p>
-          </div>
-        </div>
-        
-        <!-- Classroom Images -->
-        <div class="gallery-item reveal delay-100" data-category="classroom">
-          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Science Lab">
-          <div class="gallery-caption">
-            <h3>Science Laboratory</h3>
-            <p>Students engaged in hands-on science experiments</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-200" data-category="classroom">
-          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Primary Classroom">
-          <div class="gallery-caption">
-            <h3>Primary Classroom</h3>
-            <p>Colorful and engaging learning environment for young students</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-300" data-category="classroom">
-          <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Computer Lab">
-          <div class="gallery-caption">
-            <h3>Computer Laboratory</h3>
-            <p>Modern computer lab with the latest technology</p>
-          </div>
-        </div>
-        
         <!-- Events Images -->
+{% for event in events %}
+    {% for img in event.images.all %}
         <div class="gallery-item reveal delay-100" data-category="events">
-          <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Annual Day">
-          <div class="gallery-caption">
-            <h3>Annual Day Celebration</h3>
-            <p>Students performing at our Annual Day cultural event</p>
-          </div>
+            <img src="{{ img.image.url }}" alt="{{ event.event_name }}">
+            <div class="gallery-caption">
+                <h3>{{ event.event_name }}</h3>
+            </div>
         </div>
+    {% endfor %}
+{% endfor %}
+
         
-        <div class="gallery-item reveal delay-200" data-category="events">
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graduation Day">
-          <div class="gallery-caption">
-            <h3>Graduation Ceremony</h3>
-            <p>Class of 2023 celebrating their achievements</p>
-          </div>
-        </div>
         
-        <div class="gallery-item reveal delay-300" data-category="events">
-          <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Science Exhibition">
-          <div class="gallery-caption">
-            <h3>Science Exhibition</h3>
-            <p>Students showcasing their innovative science projects</p>
-          </div>
-        </div>
-        
-        <!-- Sports Images -->
-        <div class="gallery-item reveal delay-100" data-category="sports">
-          <img src="https://images.unsplash.com/photo-1526232691790-22a922d4bb36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Basketball Court">
-          <div class="gallery-caption">
-            <h3>Basketball Match</h3>
-            <p>Inter-school basketball tournament finals</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-200" data-category="sports">
-          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Swimming Pool">
-          <div class="gallery-caption">
-            <h3>Swimming Lessons</h3>
-            <p>Students learning swimming at our Olympic-sized pool</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-300" data-category="sports">
-          <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sports Day">
-          <div class="gallery-caption">
-            <h3>Annual Sports Day</h3>
-            <p>Students participating in track and field events</p>
-          </div>
-        </div>
-        
-        <!-- Arts Images -->
-        <div class="gallery-item reveal delay-100" data-category="arts">
-          <img src="https://images.unsplash.com/photo-1599909661646-2ed9f6c928da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Art Class">
-          <div class="gallery-caption">
-            <h3>Art Studio</h3>
-            <p>Students expressing creativity in our art studio</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-200" data-category="arts">
-          <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Music Room">
-          <div class="gallery-caption">
-            <h3>Music Room</h3>
-            <p>Students learning various musical instruments</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item reveal delay-300" data-category="arts">
-          <img src="https://images.unsplash.com/photo-1525201548942-d8732f6617a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dance Performance">
-          <div class="gallery-caption">
-            <h3>Dance Performance</h3>
-            <p>Annual cultural dance showcase by students</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   
   <!-- Image Modal -->
   <div class="modal" id="image-modal">
@@ -429,7 +313,7 @@
         Experience our vibrant community and facilities in person
       </p>
       <div class="reveal delay-200">
-        <a href="contact.html" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
+        <a href="{% url 'contact' %}" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700;">
           Schedule a Tour
         </a>
       </div>

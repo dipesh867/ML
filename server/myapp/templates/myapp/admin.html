@@ -283,17 +283,20 @@
         <!-- GALLERY -->
         <div id="gallery" class="hidden">
             <h2>Gallery Upload</h2>
-
-            <div class="upload-box">
+<form method="POST" action="{% url 'upload_event' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="upload-box">
                 <label>Upload Photos (Multiple Allowed):</label><br>
-                <input type="file" id="galleryInput" multiple accept="image/*"><br>
+                <input type="file" id="galleryInput" name="images" multiple accept="image/*"><br>
 
                 <label>Description for Photos:</label>
-                <textarea rows="3" placeholder="Write description..."></textarea>
+                <textarea rows="3" placeholder="Write description..."  name="event_name" required></textarea>
 
-                <button class="submit-btn">Upload to Gallery</button>
+                <button class="submit-btn" type="submit">Upload to Gallery</button>
             </div>
-
+</form>
+           
             <h3>Preview</h3>
             <div class="gallery-preview" id="galleryPreview"></div>
 

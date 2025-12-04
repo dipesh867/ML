@@ -105,9 +105,29 @@ def Contact_API(request):
 
 
 def Gallery_API(request):
-    return render(request,'myapp/gallery.html')
+    events = Event.objects.all()
+    return render(request, "myapp/gallery.html", {"events": events})
 
 def programs_API(request):
     return render(request,'myapp/programs.html')
+
+
+
+def upload_event(request):
+    if request.method == "POST":
+        event_name = request.POST.get("event_name")
+        images = request.FILES.getlist("images")  # <-- MULTIPLE FILES
+
+        # Create event
+        event = Event.objects.create(event_name=event_name)
+
+        # Save each image under the same event
+        for img in images:
+            EventImage.objects.create(event=event, image=img)
+
+        return redirect("admin")
+
+    return render(request, "myapp/admin.html")
+
 
 
