@@ -36,7 +36,8 @@ def admin_login_view(request):
 def Admin_API(request):
     contact = Contact.objects.all()
     admission = Admission.objects.all()
-    return render(request, 'myapp/admin.html', {'contact': contact, 'admission': admission})
+    events = EventImage.objects.all()
+    return render(request, 'myapp/admin.html', {'contact': contact, 'admission': admission, 'events': events})
 
 
 def Delete_Contact(request,id):
@@ -110,6 +111,14 @@ def Gallery_API(request):
 
 def programs_API(request):
     return render(request,'myapp/programs.html')
+
+def delete_event_image(request, image_id):
+    try:
+        image = EventImage.objects.get(id=image_id)
+        image.delete()
+    except EventImage.DoesNotExist:
+        messages.error(request, "Image not found.")
+    return redirect("admin")
 
 
 

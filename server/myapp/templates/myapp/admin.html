@@ -344,22 +344,17 @@
 <div class="Uploads" id="Uploads">
 
     <!-- Static Image 1 -->
+        {% for event in events %}
     <div class="photo-card">
-        <img src="/static/gallery/sample1.jpg" alt="Gallery Image">
-        <button class="delete-btn">Delete</button>
+        <img src="{{event.image.url}}" alt="{{event.event.event_name}}">
+        <form action=""></form>
+        <form action="{% url 'delete_event_image' event.id %}" method="post">
+            {% csrf_token %}
+            <button class="delete-btn" type="submit">Delete</button>
+        </form>
     </div>
+    {% endfor %}
 
-    <!-- Static Image 2 -->
-    <div class="photo-card">
-        <img src="/static/gallery/sample2.jpg" alt="Gallery Image">
-        <button class="delete-btn">Delete</button>
-    </div>
-
-    <!-- Static Image 3 -->
-    <div class="photo-card">
-        <img src="/static/gallery/sample3.jpg" alt="Gallery Image">
-        <button class="delete-btn">Delete</button>
-    </div>
 
 </div>
 

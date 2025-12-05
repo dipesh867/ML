@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from myapp.views import (
     Index_API, Admission_API, Contact_API, About_API, 
-    programs_API, Gallery_API,admin_login_view,Admin_API,Delete_Admission,Delete_Contact,admin_logout,upload_event
+    programs_API, Gallery_API,admin_login_view,Admin_API,Delete_Admission,Delete_Contact,admin_logout,upload_event,delete_event_image
 )
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('delete_contact/<int:id>/', Delete_Contact, name='delete_contact'),
     path('delete_admission/<int:id>/', Delete_Admission, name='delete_admission'),
     path('admin_logout/', admin_logout, name='admin_logout'),
-    path('upload_event/', upload_event, name='upload_event')
+    path('upload_event/', upload_event, name='upload_event'),
+    path('delete_event_image/<int:image_id>/', delete_event_image, name='delete_event_image')
 ]
 
