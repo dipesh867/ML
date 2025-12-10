@@ -32,50 +32,74 @@ function initNavbar() {
   const navbarToggle = document.querySelector('.navbar-toggle');
   const navbarMenu = document.querySelector('.navbar-menu');
   const menuClose = document.querySelector('.menu-close');
-  
+  const menuLinks = document.querySelectorAll('.navbar-menu a');
+
+  console.log('initNavbar called');
+  console.log('navbarToggle:', navbarToggle);
+  console.log('navbarMenu:', navbarMenu);
+
   // Toggle menu on mobile
-  if (navbarToggle) {
-    navbarToggle.addEventListener('click', function(e) {
-      e.stopPropagation(); // Prevent immediate close on document click
+  if (navbarToggle && navbarMenu) {
+    // Remove any existing listeners by cloning
+    const newToggle = navbarToggle.cloneNode(true);
+    navbarToggle.parentNode.replaceChild(newToggle, navbarToggle);
+
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Toggle clicked!');
       navbarMenu.classList.toggle('active');
-      navbarToggle.classList.toggle('active');
+      newToggle.classList.toggle('active');
       document.body.classList.toggle('menu-open');
     });
   }
-  
+
   // Close menu button
   if (menuClose) {
     menuClose.addEventListener('click', function() {
       navbarMenu.classList.remove('active');
-      navbarToggle.classList.remove('active');
+      document.querySelector('.navbar-toggle').classList.remove('active');
       document.body.classList.remove('menu-open');
     });
   }
-  
+
+  // Close menu when clicking a link
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (navbarMenu) navbarMenu.classList.remove('active');
+      const toggle = document.querySelector('.navbar-toggle');
+      if (toggle) toggle.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+
   // Close menu when clicking outside
   document.addEventListener('click', function(e) {
-    if (navbarMenu && navbarMenu.classList.contains('active') && 
-        !navbarMenu.contains(e.target) && 
-        !navbarToggle.contains(e.target)) {
+    const toggle = document.querySelector('.navbar-toggle');
+    if (navbarMenu && navbarMenu.classList.contains('active') &&
+        !navbarMenu.contains(e.target) &&
+        toggle && !toggle.contains(e.target)) {
       navbarMenu.classList.remove('active');
-      if (navbarToggle) navbarToggle.classList.remove('active');
+      toggle.classList.remove('active');
       document.body.classList.remove('menu-open');
     }
   });
-  
+
   // Change navbar on scroll
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-      navbar.classList.add('navbar-scrolled');
-      navbar.classList.remove('navbar-transparent');
-    } else {
-      navbar.classList.remove('navbar-scrolled');
-      navbar.classList.add('navbar-transparent');
-    }
-  });
-  
-  // Trigger scroll event on page load
-  window.dispatchEvent(new Event('scroll'));
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('navbar-scrolled');
+        navbar.classList.remove('navbar-transparent');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+        navbar.classList.add('navbar-transparent');
+      }
+    });
+
+    // Trigger scroll event on page load
+    window.dispatchEvent(new Event('scroll'));
+  }
 }
 
 // Handle scroll reveal animations
