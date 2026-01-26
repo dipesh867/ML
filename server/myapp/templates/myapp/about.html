@@ -792,41 +792,41 @@
       <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem;">
         <!-- Team Member 1 -->
         <div class="team-member-card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.1s;">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Principal" class="team-member-img">
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Dr. Sarah Mitchell</h3>
-          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Principal</p>
+          <img src="{% static 'myapp/images/bod.jpeg' %}" alt="Member, BOD" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Basanta Budhathoki</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Member, BOD</p>
           <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
-            With over 20 years of experience in education, Dr. Mitchell leads our school with vision and dedication.
+            With over 10 years of experience in education, Mr. Basanta leads our school with vision and dedication.
           </p>
         </div>
         
         <!-- Team Member 2 -->
         <div class="team-member-card" style="animation: fadeInLeft 0.8s ease-out forwards; animation-delay: 0.2s;">
-          <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Vice Principal" class="team-member-img">
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">James Anderson</h3>
-          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Vice Principal</p>
+          <img src="{% static 'myapp/images/admin.jpeg' %}" alt="Administrative Head " class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Aastha Upreti</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Administrative Head</p>
           <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
-            James oversees academic programs and curriculum development with passion for educational excellence.
+            Mrs.Aastha oversees academic programs and curriculum development with passion for educational excellence.
           </p>
         </div>
         
         <!-- Team Member 3 -->
         <div class="team-member-card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.3s;">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Head of Student Affairs" class="team-member-img">
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Dr. Maria Rodriguez</h3>
-          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Head of Student Affairs</p>
+          <img src="{% static 'myapp/images/account.jpeg' %}"  alt="Account Head" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Koshraj Adhikari</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Account Head</p>
           <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
-            Maria ensures student wellness and creates an inclusive environment for all students to thrive.
+            Mr.Koshraj ensures student wellness and creates an inclusive environment for all students to thrive.
           </p>
         </div>
         
         <!-- Team Member 4 -->
         <div class="team-member-card" style="animation: fadeInRight 0.8s ease-out forwards; animation-delay: 0.4s;">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="Director of Technology" class="team-member-img">
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">David Chen</h3>
-          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Director of Technology</p>
+          <img src="{% static 'myapp/images/coordinator.jpeg' %}" alt="Academic Co-ordinator" class="team-member-img">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--text-dark);">Bibhav Labh</h3>
+          <p style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">Academic Co-ordinator</p>
           <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
-            David leads our digital transformation, integrating innovative technologies into learning.
+            Mr.Bibhav leads our digital transformation, integrating innovative technologies into learning.
           </p>
         </div>
       </div>
@@ -841,8 +841,7 @@
         Be part of our journey towards educational excellence and holistic development
       </p>
       <div style="animation: fadeIn 1s ease-out 0.6s forwards;">
-        <a href="{% url 'contact' %
-      }" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700; padding: 1rem 2.5rem; border-radius: 50px; display: inline-block; transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+        <a href="{% url 'contact' %}" class="btn btn-lg" style="background-color: white; color: var(--primary); font-weight: 700; padding: 1rem 2.5rem; border-radius: 50px; display: inline-block; transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
           Schedule a Visit
         </a>
       </div>

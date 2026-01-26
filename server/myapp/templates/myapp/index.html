@@ -1882,7 +1882,7 @@
         </style>
         <div class="about-text" style="flex: 1; animation: fadeInLeft 1s ease-out;">
           <span class="section-subtitle" style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 1rem; animation: fadeIn 0.8s ease-out;">Welcome to Motherland</span>
-          <h2 class="section-title" style="margin-bottom: 1.5rem; font-size: 2.5rem; line-height: 1.2; animation: slideDown 0.8s ease-out;">Excellence in Education Since 2009</h2>
+          <h2 class="section-title" style="margin-bottom: 1.5rem; font-size: 2.5rem; line-height: 1.2; animation: slideDown 0.8s ease-out;">Excellence in Education Since 2059 BS</h2>
           <p style="color: var(--text-muted); font-size: 1.125rem; margin-bottom: 1.5rem; line-height: 1.8; animation: fadeIn 1s ease-out 0.2s both;">
             At Motherland Academy School, we believe that every child has unlimited potential. 
             Our dedicated faculty and innovative teaching methods create an environment 
@@ -1899,7 +1899,7 @@
         <div class="about-image" style="position: relative; flex: 1; animation: fadeInRight 1s ease-out;">
           <div style="position: relative; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-lg);">
             <img
-              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              src="{% static 'myapp/images/5.jpg' %}"
               alt="Students in classroom"
               class="card-hover"
               style="width: 100%; height: auto; object-fit: cover; transition: transform 0.5s ease;"
@@ -1953,93 +1953,6 @@
 
  
 
-  <!-- Testimonials Section -->
-  <section class="section" style="background-color: var(--gray-50);">
-    <div class="container">
-      <div class="text-center" style="margin-bottom: 4rem;">
-        <h2 class="section-title reveal">What People Say</h2>
-        <p class="section-description reveal delay-100">
-          Hear from our community about their Motherland experience
-        </p>
-      </div>
-      
-     <div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-
-    <!-- Testimonial 1 -->
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="card-content">
-          <div class="testimonial-header">
-            <img
-              src="https://images.unsplash.com/photo-1494790108755-2616c56f1f9c"
-              alt="Sarah Johnson"
-              class="testimonial-img"
-            />
-            <div>
-              <h4 class="testimonial-name">Sarah Johnson</h4>
-              <p class="testimonial-role">Parent</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            "Motherland Academy School has transformed my child's learning experience."
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Testimonial 2 -->
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="card-content">
-          <div class="testimonial-header">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
-              alt="Michael Chen"
-              class="testimonial-img"
-            />
-            <div>
-              <h4 class="testimonial-name">Michael Chen</h4>
-              <p class="testimonial-role">Graduate</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            "The education I received prepared me well for university."
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Testimonial 3 -->
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="card-content">
-          <div class="testimonial-header">
-            <img
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
-              alt="Dr. Emily Rodriguez"
-              class="testimonial-img"
-            />
-            <div>
-              <h4 class="testimonial-name">Dr. Emily Rodriguez</h4>
-              <p class="testimonial-role">Education Consultant</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            "Motherland Academy sets the standard for modern education."
-          </p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Pagination Dots -->
-  <div class="swiper-pagination"></div>
-</div>
-
-    </div>
-  </section>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
@@ -2115,21 +2028,21 @@
             <div class="team-card" style="min-width: 100%; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease;">
               <div style="display: flex; flex-direction: row; gap: 2rem; align-items: center;">
                 <div class="team-image-container" style="flex: 0 0 300px; height: 300px; border-radius: 1rem; overflow: hidden;">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  <img src="{% static 'myapp/images/principal.jpeg' %}"
                        alt="Sarah Wilson" 
                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                 </div>
                 <div class="team-info" style="flex: 1;">
-                  <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">Sarah Wilson</h3>
+                  <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">Mohan Budhathoki</h3>
                   <p style="color: var(--primary); font-weight: 500; font-size: 1.25rem; margin-bottom: 1.5rem;">Principal</p>
                   <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
                     "Education is not preparation for life; education is life itself. I believe in creating an environment where every student can thrive and discover their true potential."
                   </p>
-                  <div class="social-links" style="display: flex; gap: 1rem;">
+                  <!-- <div class="social-links" style="display: flex; gap: 1rem;">
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-linkedin"></i></a>
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-twitter"></i></a>
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fas fa-envelope"></i></a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -2138,47 +2051,26 @@
             <div class="team-card" style="min-width: 100%; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease;">
               <div style="display: flex; flex-direction: row; gap: 2rem; align-items: center;">
                 <div class="team-image-container" style="flex: 0 0 300px; height: 300px; border-radius: 1rem; overflow: hidden;">
-                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  <img src="{% static 'myapp/images/director.jpeg' %}"
                        alt="John Davis" 
                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                 </div>
                 <div class="team-info" style="flex: 1;">
-                  <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">John Davis</h3>
-                  <p style="color: var(--primary); font-weight: 500; font-size: 1.25rem; margin-bottom: 1.5rem;">Head of Sciences</p>
+                  <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">Gita Gautam</h3>
+                  <p style="color: var(--primary); font-weight: 500; font-size: 1.25rem; margin-bottom: 1.5rem;">Director</p>
                   <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
                     "The best way to predict the future is to create it. Science education is about inspiring curiosity and fostering innovation."
                   </p>
-                  <div class="social-links" style="display: flex; gap: 1rem;">
+                  <!-- <div class="social-links" style="display: flex; gap: 1rem;">
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-linkedin"></i></a>
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-twitter"></i></a>
                     <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fas fa-envelope"></i></a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
 
-            <!-- Team Member 3 -->
-            <div class="team-card" style="min-width: 100%; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-              <div style="display: flex; flex-direction: row; gap: 2rem; align-items: center;">
-                <div class="team-image-container" style="flex: 0 0 300px; height: 300px; border-radius: 1rem; overflow: hidden;">
-                  <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                       alt="Emily Chen" 
-                       style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                </div>
-                <div class="team-info" style="flex: 1;">
-                  <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">Emily Chen</h3>
-                  <p style="color: var(--primary); font-weight: 500; font-size: 1.25rem; margin-bottom: 1.5rem;">Arts Coordinator</p>
-                  <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
-                    "Creativity is intelligence having fun. Through arts, we help students express themselves and discover their unique voice."
-                  </p>
-                  <div class="social-links" style="display: flex; gap: 1rem;">
-                    <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color: var(--primary); font-size: 1.25rem;"><i class="fas fa-envelope"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div> 
 
           <!-- Team Section -->
